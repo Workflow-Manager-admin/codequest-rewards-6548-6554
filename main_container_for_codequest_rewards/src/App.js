@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import FireEffects from './components/FireEffects';
 
 function App() {
   return (
@@ -8,9 +9,9 @@ function App() {
         <div className="container">
           <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
             <div className="logo">
-              <span className="logo-symbol">*</span> KAVIA AI
+              <span className="logo-symbol">🔥</span> CodeQuest Rewards
             </div>
-            <button className="btn">Template Button</button>
+            <button className="btn">Dashboard</button>
           </div>
         </div>
       </nav>
@@ -18,15 +19,18 @@ function App() {
       <main>
         <div className="container">
           <div className="hero">
-            <div className="subtitle">AI Workflow Manager Template</div>
+            <div className="subtitle">Level Up Your Code</div>
             
-            <h1 className="title">main_container_for_codequest_rewards</h1>
+            <h1 className="title">CodeQuest Rewards</h1>
             
             <div className="description">
-              Start building your application.
+              A gamified internal application designed to incentivize and improve code quality by rewarding reviewers who identify and validate bugs or discrepancies in Merge Requests across organizational projects.
             </div>
             
-            <button className="btn btn-large">Button</button>
+            <button className="btn btn-large">Start Quest</button>
+            
+            {/* Fire effects rendered behind the content */}
+            <FireEffects />
           </div>
         </div>
       </main>
