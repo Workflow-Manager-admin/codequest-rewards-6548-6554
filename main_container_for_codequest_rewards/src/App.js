@@ -28,6 +28,9 @@ function App() {
               <Link to="/leaderboard" className="nav-link">
                 <button className="btn btn-secondary">Leaderboard</button>
               </Link>
+              <Link to="/merge-requests" className="nav-link">
+                <button className="btn btn-secondary">Code Review</button>
+              </Link>
               <Link to="/" className="nav-link">
                 <button className="btn">Dashboard</button>
               </Link>
@@ -40,6 +43,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/profile" element={<UserProfile />} />
+        <Route path="/merge-requests" element={<MergeRequestReview />} />
       </Routes>
     </div>
   );
