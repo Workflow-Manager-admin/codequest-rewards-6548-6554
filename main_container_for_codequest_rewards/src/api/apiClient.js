@@ -44,17 +44,42 @@ apiClient.interceptors.response.use(
       
       try {
         // Would refresh token in real implementation
-        // const refreshToken = localStorage.getItem('refresh_token');
-        // const response = await axios.post('/auth/refresh', { refreshToken });
-        // localStorage.setItem('auth_token', response.data.token);
+        const refreshToken = localStorage.getItem(apiConfig.auth.refreshTokenKey);
+        
+        // In a real implementation, we would make a refresh token request:
+        // const response = await axios.post(apiConfig.auth.refreshEndpoint, { refreshToken });
+        // localStorage.setItem(apiConfig.auth.tokenKey, response.data.token);
+        
+        // Mock refresh token success (remove this in real implementation)
+        console.log('Token refreshed successfully (mock)');
         
         return apiClient(originalRequest);
       } catch (refreshError) {
         // Handle failed refresh by logging out
-        // localStorage.removeItem('auth_token');
-        // localStorage.removeItem('refresh_token');
+        localStorage.removeItem(apiConfig.auth.tokenKey);
+        localStorage.removeItem(apiConfig.auth.refreshTokenKey);
+        console.error('Failed to refresh token:', refreshError);
+        
+        // In a real implementation, you might redirect to login page:
+        // window.location.href = '/login';
+        
         return Promise.reject(refreshError);
       }
+    }
+    
+    // Implement retry logic for certain errors
+    if (apiConfig.retry.enabled && 
+        apiConfig.retry.statusCodesToRetry.includes(error.response?.status) && 
+        (!originalRequest._retryCount || originalRequest._retryCount < apiConfig.retry.maxRetries)) {
+      
+      originalRequest._retryCount = (originalRequest._retryCount || 0) + 1;
+      
+      // Exponential backoff delay
+      const delay = apiConfig.retry.retryDelay * Math.pow(2, originalRequest._retryCount - 1);
+      
+      return new Promise(resolve => {
+        setTimeout(() => resolve(apiClient(originalRequest)), delay);
+      });
     }
     
     return Promise.reject(error);
