@@ -334,7 +334,8 @@ const RewardsRedemption = () => {
                 <span style={{ marginRight: '5px' }}>{category.icon}</span>
                 {category.name}
               </button>
-            ))}
+            ))
+            )}
           </div>
           
           {/* Rewards grid */}
@@ -344,7 +345,16 @@ const RewardsRedemption = () => {
             gap: '20px',
             marginTop: '20px'
           }}>
-            {filteredRewards.length > 0 ? (
+            {isLoading.rewards ? (
+              <div style={{
+                gridColumn: '1 / -1',
+                textAlign: 'center',
+                padding: '40px 0',
+                color: 'var(--text-secondary)'
+              }}>
+                Loading rewards...
+              </div>
+            ) : filteredRewards.length > 0 ? (
               filteredRewards.map(reward => {
                 const affordable = canAfford(reward);
                 return (
@@ -485,7 +495,10 @@ const RewardsRedemption = () => {
                 overflow: 'hidden',
                 marginTop: '15px'
               }}>
-                {redemptionHistory.map(item => (
+                {isLoading.history ? (
+                  <div style={{ padding: '20px', textAlign: 'center' }}>Loading history...</div>
+                ) : (
+                  history.map(item => (
                   <div key={item.id} className="history-item" style={{
                     padding: '15px',
                     borderBottom: '1px solid var(--border-color)',
@@ -525,7 +538,8 @@ const RewardsRedemption = () => {
                       {item.status}
                     </div>
                   </div>
-                ))}
+                ))
+                )}
               </div>
             </div>
           )}

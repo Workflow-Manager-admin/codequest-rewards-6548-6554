@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FireEffects from './FireEffects';
+import { LeaderboardService } from '../services';
 
 /**
  * Leaderboard component displays top reviewers and earners with gaming-style visuals
