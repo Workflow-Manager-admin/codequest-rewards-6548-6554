@@ -50,6 +50,7 @@ function App() {
         <Route path="/profile" element={<UserProfile />} />
         <Route path="/merge-requests" element={<MergeRequestReview />} />
         <Route path="/rewards" element={<RewardsRedemption />} />
+        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
     </div>
   );
