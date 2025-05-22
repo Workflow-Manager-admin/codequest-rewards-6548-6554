@@ -401,43 +401,121 @@ body {
 }
 
 /* Animation keyframes */
-@keyframes flicker {
-  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+@keyframes flame-flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
     opacity: 0.95;
+    transform: scaleY(1.0) scaleX(1.0);
+  }
+  20%, 55% {
+    opacity: 0.8;
+    transform: scaleY(0.94) scaleX(1.02);
+  }
+  40%, 80% {
+    transform: scaleY(1.02) scaleX(0.96);
+  }
+}
+
+@keyframes flame-flicker-alt {
+  0%, 25%, 48%, 75%, 100% {
+    opacity: 0.9;
+    transform: scaleY(1.0) scaleX(1.0) translateX(0);
+  }
+  15%, 65% {
+    opacity: 0.75;
+    transform: scaleY(0.92) scaleX(1.05) translateX(-2px);
+  }
+  35%, 85% {
+    opacity: 0.85;
+    transform: scaleY(1.05) scaleX(0.97) translateX(2px);
+  }
+}
+
+@keyframes core-flicker {
+  0%, 30%, 60%, 100% {
+    opacity: 0.5;
     transform: scale(1.0);
   }
-  20%, 24%, 55% {
+  20%, 50%, 80% {
     opacity: 0.7;
-    transform: scale(0.95);
+    transform: scale(1.15);
+  }
+}
+
+@keyframes flame-dance {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-5px) translateX(2px) rotate(3deg);
+  }
+  50% {
+    transform: translateY(-2px) translateX(-2px) rotate(-2deg);
+  }
+  75% {
+    transform: translateY(-8px) translateX(0) rotate(1deg);
+  }
+}
+
+@keyframes flame-surge {
+  0% {
+    transform: scaleY(0.94);
+  }
+  50% {
+    transform: scaleY(1.0);
+  }
+  100% {
+    transform: scaleY(0.97);
+  }
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: rotate(-1deg) translateX(0);
+  }
+  25% {
+    transform: rotate(2deg) translateX(-2px);
+  }
+  50% {
+    transform: rotate(0deg) translateX(1px);
+  }
+  75% {
+    transform: rotate(-2deg) translateX(-1px);
+  }
+}
+
+@keyframes sway-reverse {
+  0%, 100% {
+    transform: rotate(1deg) translateX(0);
+  }
+  30% {
+    transform: rotate(-2deg) translateX(2px);
+  }
+  60% {
+    transform: rotate(0deg) translateX(-1px);
+  }
+}
+
+@keyframes glow-pulse {
+  0% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(1.02);
   }
 }
 
 @keyframes text-flicker {
   0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-    text-shadow: 0 0 10px var(--fire-glow);
+    text-shadow: 0 0 15px var(--fire-glow), 0 0 30px var(--fire-orange);
   }
   20%, 24%, 55% {
     text-shadow: 0 0 5px var(--fire-glow);
-  }
-}
-
-@keyframes glow {
-  0% {
-    opacity: 0.3;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0.7;
-    transform: scale(1.05);
-  }
-}
-
-@keyframes scale {
-  0% {
-    transform: scale(0.9);
-  }
-  100% {
-    transform: scale(1.0);
   }
 }
 
@@ -453,28 +531,72 @@ body {
   }
 }
 
-@keyframes float-up {
+@keyframes float-up-3d {
   0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 0.7;
+    transform: 
+      translateY(0) 
+      translateX(0) 
+      translateZ(0) 
+      rotate(0deg);
+    opacity: 0.9;
   }
-  50% {
-    opacity: 0.3;
+  33% {
+    transform: 
+      translateY(-200px) 
+      translateX(var(--x-drift, 10px)) 
+      translateZ(var(--z-drift, 5px)) 
+      rotate(120deg);
+    opacity: 0.5;
+  }
+  66% {
+    transform: 
+      translateY(-400px) 
+      translateX(calc(var(--x-drift, 10px) * 2)) 
+      translateZ(calc(var(--z-drift, 5px) * 2)) 
+      rotate(240deg);
+    opacity: 0.2;
   }
   100% {
-    transform: translateY(-600px) rotate(360deg);
+    transform: 
+      translateY(-600px) 
+      translateX(calc(var(--x-drift, 10px) * 3)) 
+      translateZ(calc(var(--z-drift, 5px) * 3)) 
+      rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes smoke-rise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(-150px) scale(5);
     opacity: 0;
   }
 }
 
 @keyframes border-pulse {
   0% {
-    box-shadow: 0 0 5px var(--fire-glow);
+    box-shadow: 0 0 15px var(--fire-glow);
   }
   50% {
-    box-shadow: 0 0 20px var(--fire-glow), 0 0 30px var(--fire-orange);
+    box-shadow: 0 0 25px var(--fire-glow), 0 0 40px var(--fire-orange);
   }
   100% {
     box-shadow: 0 0 10px var(--fire-glow);
+  }
+}
+
+@keyframes button-heat {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
