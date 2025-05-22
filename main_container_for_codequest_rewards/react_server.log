@@ -96,3 +96,4 @@ ERROR in ./src/components/AdminUserProjectAssignment.js 90:26-56
 export 'ProjectService' (imported as 'ProjectService') was not found in '../services' (possible exports: LeaderboardService, MergeRequestService, RewardsService, UserService)
 
 webpack compiled with 10 errors and 1 warning
+Compiling...
