@@ -22,13 +22,45 @@ const MergeRequestReview = () => {
     reviewsCompleted: 0
   });
 
-  // Load the first MR by default
+  // State for storing all merge requests
+  const [allMergeRequests, setAllMergeRequests] = useState([]);
+  // Loading state
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Load merge requests on component mount
   useEffect(() => {
-    if (mergeRequests.length > 0 && !selectedMR) {
-      setSelectedMR(mergeRequests[0]);
-      setActiveDiff(mergeRequests[0].codeChanges[0]);
+    const fetchMergeRequests = async () => {
+      try {
+        setIsLoading(true);
+        const result = await MergeRequestService.getMergeRequests();
+        setAllMergeRequests(result.data);
+        
+        // Select first merge request by default
+        if (result.data.length > 0 && !selectedMR) {
+          setSelectedMR(result.data[0]);
+          if (result.data[0].codeChanges?.length > 0) {
+            setActiveDiff(result.data[0].codeChanges[0]);
+          }
+        }
+      } catch (error) {
+        console.error("Failed to load merge requests:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    fetchMergeRequests();
+  }, []);
+
+  // Load the first MR by default (only if not already set and allMergeRequests changes)
+  useEffect(() => {
+    if (allMergeRequests.length > 0 && !selectedMR) {
+      setSelectedMR(allMergeRequests[0]);
+      if (allMergeRequests[0].codeChanges?.length > 0) {
+        setActiveDiff(allMergeRequests[0].codeChanges[0]);
+      }
     }
-  }, [selectedMR]);
+  }, [allMergeRequests, selectedMR]);
 
   // Initialize bugs found object
   useEffect(() => {
