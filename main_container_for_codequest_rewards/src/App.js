@@ -3,6 +3,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import Home from './components/Home';
 import Leaderboard from './components/Leaderboard';
+import UserProfile from './components/UserProfile';
 
 /**
  * Main App component for the CodeQuest Rewards application
