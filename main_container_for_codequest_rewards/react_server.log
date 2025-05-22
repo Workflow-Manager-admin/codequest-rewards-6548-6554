@@ -136,3 +136,56 @@ export 'ProjectService' (imported as 'ProjectService') was not found in '../serv
 
 webpack compiled with 10 errors and 1 warning
 Compiling...
+Failed to compile.
+
+Attempted import error: 'AdminService' is not exported from '../services' (imported as 'AdminService').
+WARNING in [eslint] 
+src/components/AdminUserProjectAssignment.js
+  Line 43:6:  React Hook useEffect has a missing dependency: 'calculateUnassignedUsers'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/services/AdminService.js
+  Line 1:8:     'apiClient' is defined but never used  no-unused-vars
+  Line 49:21:   Unreachable code                       no-unreachable
+  Line 124:21:  Unreachable code                       no-unreachable
+  Line 211:21:  Unreachable code                       no-unreachable
+  Line 285:21:  Unreachable code                       no-unreachable
+
+src/services/ProjectService.js
+  Line 1:8:  'apiClient' is defined but never used  no-unused-vars
+
+src/services/index.js
+  Line 5:8:  'AdminService' is defined but never used    no-unused-vars
+  Line 6:8:  'ProjectService' is defined but never used  no-unused-vars
+
+ERROR in ./src/components/AdminDashboard.js 31:27-52
+export 'AdminService' (imported as 'AdminService') was not found in '../services' (possible exports: LeaderboardService, MergeRequestService, RewardsService, UserService)
+
+ERROR in ./src/components/AdminProjectManagement.js 29:25-51
+export 'ProjectService' (imported as 'ProjectService') was not found in '../services' (possible exports: LeaderboardService, MergeRequestService, RewardsService, UserService)
+
+ERROR in ./src/components/AdminProjectManagement.js 43:28-57
+export 'ProjectService' (imported as 'ProjectService') was not found in '../services' (possible exports: LeaderboardService, MergeRequestService, RewardsService, UserService)
+
+ERROR in ./src/components/AdminProjectManagement.js 59:14-42
+export 'ProjectService' (imported as 'ProjectService') was not found in '../services' (possible exports: LeaderboardService, MergeRequestService, RewardsService, UserService)
+
+ERROR in ./src/components/AdminProjectManagement.js 62:14-42
+export 'ProjectService' (imported as 'ProjectService') was not found in '../services' (possible exports: LeaderboardService, MergeRequestService, RewardsService, UserService)
+
+ERROR in ./src/components/AdminUserManagement.js 29:25-46
+export 'AdminService' (imported as 'AdminService') was not found in '../services' (possible exports: LeaderboardService, MergeRequestService, RewardsService, UserService)
+
+ERROR in ./src/components/AdminUserManagement.js 56:14-34
+export 'AdminService' (imported as 'AdminService') was not found in '../services' (possible exports: LeaderboardService, MergeRequestService, RewardsService, UserService)
+
+ERROR in ./src/components/AdminUserProjectAssignment.js 56:25-51
+export 'ProjectService' (imported as 'ProjectService') was not found in '../services' (possible exports: LeaderboardService, MergeRequestService, RewardsService, UserService)
+
+ERROR in ./src/components/AdminUserProjectAssignment.js 73:25-46
+export 'AdminService' (imported as 'AdminService') was not found in '../services' (possible exports: LeaderboardService, MergeRequestService, RewardsService, UserService)
+
+ERROR in ./src/components/AdminUserProjectAssignment.js 90:26-56
+export 'ProjectService' (imported as 'ProjectService') was not found in '../services' (possible exports: LeaderboardService, MergeRequestService, RewardsService, UserService)
+
+webpack compiled with 10 errors and 1 warning
+Compiling...
