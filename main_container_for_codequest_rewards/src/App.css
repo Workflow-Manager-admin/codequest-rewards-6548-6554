@@ -6,15 +6,20 @@
   --text-secondary: rgba(255, 255, 255, 0.7);
   --border-color: rgba(255, 255, 255, 0.1);
   
-  /* Fire theme colors */
-  --fire-red: #FF4500;
-  --fire-orange: #FF7F00;
-  --fire-yellow: #FFD700;
-  --fire-glow: rgba(255, 69, 0, 0.4);
+  /* Enhanced Fire theme colors */
+  --fire-red: #FF3300;
+  --fire-orange: #FF6600;
+  --fire-yellow: #FFCC00;
+  --fire-glow: rgba(255, 51, 0, 0.6);
+  --fire-blue-core: #66CCFF; /* Blue core of intense flames */
   --ember-orange: #FF6600;
   --ember-yellow: #FFCC00;
+  --ember-red: #FF0000;
   --gaming-purple: #9932CC;
   --gaming-neon-blue: #4D4DFF;
+  --gaming-neon-green: #39FF14;
+  --gaming-dark-shadow: rgba(0, 0, 0, 0.8);
+  --gaming-highlight: rgba(255, 255, 255, 0.9);
 }
 
 body {
