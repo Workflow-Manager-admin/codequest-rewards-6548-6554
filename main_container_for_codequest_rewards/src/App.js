@@ -48,6 +48,7 @@ function App() {
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/profile" element={<UserProfile />} />
         <Route path="/merge-requests" element={<MergeRequestReview />} />
+        <Route path="/rewards" element={<RewardsRedemption />} />
       </Routes>
     </div>
   );
