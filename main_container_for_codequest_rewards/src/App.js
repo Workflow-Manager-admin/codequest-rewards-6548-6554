@@ -4,6 +4,7 @@ import './App.css';
 import Home from './components/Home';
 import Leaderboard from './components/Leaderboard';
 import UserProfile from './components/UserProfile';
+import MergeRequestReview from './components/MergeRequestReview';
 
 /**
  * Main App component for the CodeQuest Rewards application
