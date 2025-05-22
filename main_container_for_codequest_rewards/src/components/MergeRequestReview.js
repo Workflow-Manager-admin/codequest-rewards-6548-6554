@@ -308,7 +308,11 @@ const MergeRequestReview = () => {
           <div className="mr-selection">
             <h3>Select Merge Request</h3>
             <div className="mr-list">
-              {mergeRequests.map(mr => (
+              {isLoading ? (
+                <div style={{ padding: '20px', textAlign: 'center', color: 'var(--text-secondary)' }}>
+                  Loading merge requests...
+                </div>
+              ) : allMergeRequests.map(mr => (
                 <div 
                   key={mr.id}
                   className={`mr-item ${selectedMR && mr.id === selectedMR.id ? 'active' : ''}`}
