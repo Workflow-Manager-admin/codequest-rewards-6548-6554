@@ -77,8 +77,8 @@ const UserProfile = () => {
     fetchUserActivity();
   }, [activeTab]);
   
-  // Calculate XP progress percentage
-  const xpProgressPercentage = Math.round((userData.xp / userData.xpToNextLevel) * 100);
+  // Calculate XP progress percentage - only if userData exists
+  const xpProgressPercentage = userData ? Math.round((userData.xp / userData.xpToNextLevel) * 100) : 0;
   
   // Function to render the appropriate tab content
   const renderTabContent = () => {
@@ -257,6 +257,33 @@ const UserProfile = () => {
                   <div className="stat-label">Badges</div>
                 </div>
               </div>
+              
+              {/* Tab navigation for profile sections */}
+              <div className="profile-tabs">
+                <button
+                  className={`tab-btn ${activeTab === 'achievements' ? 'active' : ''}`}
+                  onClick={() => setActiveTab('achievements')}
+                >
+                  Achievements
+                </button>
+                <button
+                  className={`tab-btn ${activeTab === 'activity' ? 'active' : ''}`}
+                  onClick={() => setActiveTab('activity')}
+                >
+                  Activity
+                </button>
+                <button
+                  className={`tab-btn ${activeTab === 'stats' ? 'active' : ''}`}
+                  onClick={() => setActiveTab('stats')}
+                >
+                  Stats
+                </button>
+              </div>
+              
+              {/* Content area for the selected tab */}
+              <div className="profile-content">
+                {renderTabContent()}
+              </div>
             </>
           ) : (
             <div style={{ 
@@ -268,33 +295,6 @@ const UserProfile = () => {
               Failed to load profile data
             </div>
           )}
-          
-          {/* Tab navigation for profile sections */}
-          <div className="profile-tabs">
-            <button
-              className={`tab-btn ${activeTab === 'achievements' ? 'active' : ''}`}
-              onClick={() => setActiveTab('achievements')}
-            >
-              Achievements
-            </button>
-            <button
-              className={`tab-btn ${activeTab === 'activity' ? 'active' : ''}`}
-              onClick={() => setActiveTab('activity')}
-            >
-              Activity
-            </button>
-            <button
-              className={`tab-btn ${activeTab === 'stats' ? 'active' : ''}`}
-              onClick={() => setActiveTab('stats')}
-            >
-              Stats
-            </button>
-          </div>
-          
-          {/* Content area for the selected tab */}
-          <div className="profile-content">
-            {renderTabContent()}
-          </div>
           
           {/* Fire effects at the bottom */}
           <FireEffects />
