@@ -391,6 +391,172 @@ export const bugRewards = {
   }
 };
 
+// Mock rewards available for redemption
+export const availableRewards = [
+  {
+    id: 'reward-1',
+    name: 'Premium Mechanical Keyboard',
+    description: 'High-performance mechanical gaming keyboard with customizable RGB lighting',
+    points: 2500,
+    category: 'hardware',
+    image: '⌨️',
+    stock: 3,
+    popularity: 'high',
+    featured: true
+  },
+  {
+    id: 'reward-2',
+    name: 'Conference Ticket',
+    description: 'Ticket to the annual Developer Conference with workshops and networking',
+    points: 3500,
+    category: 'experience',
+    image: '🎫',
+    stock: 5,
+    popularity: 'high',
+    featured: true
+  },
+  {
+    id: 'reward-3',
+    name: 'Premium Headphones',
+    description: 'Noise-cancelling studio quality headphones for distraction-free coding',
+    points: 2000,
+    category: 'hardware',
+    image: '🎧',
+    stock: 2,
+    popularity: 'medium',
+    featured: true
+  },
+  {
+    id: 'reward-4',
+    name: 'Extra Vacation Day',
+    description: 'Earn an extra day off to recharge your coding powers',
+    points: 5000,
+    category: 'experience',
+    image: '🏖️',
+    stock: 10,
+    popularity: 'very high',
+    featured: true
+  },
+  {
+    id: 'reward-5',
+    name: 'Dev Team Lunch',
+    description: 'Lunch with the development team of your choice',
+    points: 1000,
+    category: 'experience',
+    image: '🍕',
+    stock: 8,
+    popularity: 'medium',
+    featured: false
+  },
+  {
+    id: 'reward-6',
+    name: 'Technical Book Library',
+    description: 'Digital library with access to premium technical books and resources',
+    points: 1500,
+    category: 'digital',
+    image: '📚',
+    stock: 15,
+    popularity: 'low',
+    featured: false
+  },
+  {
+    id: 'reward-7',
+    name: 'Premium IDE License',
+    description: 'One-year license for the premium version of your favorite IDE',
+    points: 2200,
+    category: 'digital',
+    image: '💻',
+    stock: 7,
+    popularity: 'medium',
+    featured: false
+  },
+  {
+    id: 'reward-8',
+    name: 'Gaming Mouse',
+    description: 'High-precision gaming mouse with programmable buttons',
+    points: 1800,
+    category: 'hardware',
+    image: '🖱️',
+    stock: 4,
+    popularity: 'medium',
+    featured: false
+  },
+  {
+    id: 'reward-9',
+    name: 'Code Mentor Session',
+    description: 'One-on-one session with a senior developer or architect',
+    points: 1200,
+    category: 'experience',
+    image: '👨‍💻',
+    stock: 6,
+    popularity: 'medium',
+    featured: false
+  },
+  {
+    id: 'reward-10',
+    name: 'Custom Desk Setup',
+    description: 'Ergonomic desk accessories including monitor stand and keyboard rest',
+    points: 2800,
+    category: 'hardware',
+    image: '🖥️',
+    stock: 2,
+    popularity: 'high',
+    featured: true
+  },
+  {
+    id: 'reward-11',
+    name: 'Cloud Credits',
+    description: 'Credits for your favorite cloud platform to experiment with personal projects',
+    points: 1600,
+    category: 'digital',
+    image: '☁️',
+    stock: 20,
+    popularity: 'low',
+    featured: false
+  },
+  {
+    id: 'reward-12',
+    name: 'Company Swag Pack',
+    description: 'Premium pack with branded hoodie, water bottle, stickers and more',
+    points: 800,
+    category: 'merchandise',
+    image: '👕',
+    stock: 15,
+    popularity: 'low',
+    featured: false
+  }
+];
+
+// Mock categories for rewards filtering
+export const rewardCategories = [
+  { id: 'all', name: 'All Rewards', icon: '🏆' },
+  { id: 'hardware', name: 'Hardware', icon: '💻' },
+  { id: 'digital', name: 'Digital', icon: '📱' },
+  { id: 'experience', name: 'Experiences', icon: '🎭' },
+  { id: 'merchandise', name: 'Merchandise', icon: '👕' }
+];
+
+// Mock user redemption history
+export const redemptionHistory = [
+  {
+    id: 'rdm-1',
+    rewardId: 'reward-6',
+    rewardName: 'Technical Book Library',
+    pointsCost: 1500,
+    redeemDate: '2023-04-15T10:23:15Z',
+    status: 'delivered'
+  },
+  {
+    id: 'rdm-2',
+    rewardId: 'reward-5',
+    rewardName: 'Dev Team Lunch',
+    pointsCost: 1000,
+    redeemDate: '2023-05-02T14:45:30Z',
+    status: 'scheduled',
+    scheduledFor: '2023-05-20T12:00:00Z'
+  }
+];
+
 // Mock badges related to code reviews
 export const reviewBadges = [
   {
