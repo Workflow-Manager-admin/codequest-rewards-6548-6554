@@ -94,36 +94,42 @@ const MergeRequestReview = () => {
   };
 
   // Handle bug claim
-  const handleClaimBug = (bugId) => {
-    if (!bugsFound[bugId] || bugsFound[bugId].claimed) return;
+  const handleClaimBug = async (bugId) => {
+    if (!selectedMR || !bugsFound[bugId] || bugsFound[bugId].claimed) return;
 
-    // Clone the current bugs state
-    const updatedBugs = { ...bugsFound };
-    updatedBugs[bugId].claimed = true;
-
-    // Update bugs state
-    setBugsFound(updatedBugs);
-
-    // Prepare reward information for modal
-    const bug = bugsFound[bugId];
-    const reward = bugRewards[bug.severity];
-    
-    // Update user stats
-    setUserStats(prev => ({
-      bugsFound: prev.bugsFound + 1,
-      pointsEarned: prev.pointsEarned + bug.points,
-      reviewsCompleted: prev.reviewsCompleted
-    }));
-
-    // Show reward modal
-    setRewardInfo({
-      bugId,
-      description: bug.description,
-      points: bug.points,
-      xp: reward.xp,
-      severity: bug.severity
-    });
-    setShowRewardModal(true);
+    try {
+      // Call service to claim the bug
+      const result = await MergeRequestService.claimBug(selectedMR.id, bugId);
+      
+      if (result.success) {
+        // Clone the current bugs state
+        const updatedBugs = { ...bugsFound };
+        updatedBugs[bugId].claimed = true;
+        
+        // Update bugs state
+        setBugsFound(updatedBugs);
+        
+        // Update user stats
+        setUserStats(prev => ({
+          bugsFound: prev.bugsFound + 1,
+          pointsEarned: prev.pointsEarned + result.points,
+          reviewsCompleted: prev.reviewsCompleted
+        }));
+        
+        // Show reward modal
+        setRewardInfo({
+          bugId,
+          description: result.description,
+          points: result.points,
+          xp: result.xp,
+          severity: result.severity
+        });
+        setShowRewardModal(true);
+      }
+    } catch (error) {
+      console.error("Failed to claim bug:", error);
+      alert(`Failed to claim bug: ${error.message}`);
+    }
   };
 
   // Close reward modal
