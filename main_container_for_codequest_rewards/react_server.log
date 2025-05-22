@@ -1022,3 +1022,45 @@ src/components/MergeRequestReview.js
 Search for the keywords to learn more about each error.
 
 webpack compiled with 1 error and 1 warning
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/components/MergeRequestReview.js
+  Line 311:16:  'mergeRequests' is not defined  no-undef
+
+Search for the keywords to learn more about each error.
+WARNING in [eslint] 
+src/api/leaderboardApi.js
+  Line 1:8:  'apiClient' is defined but never used  no-unused-vars
+
+src/api/mergeRequestApi.js
+  Line 1:8:  'apiClient' is defined but never used  no-unused-vars
+
+src/api/rewardsApi.js
+  Line 1:8:  'apiClient' is defined but never used  no-unused-vars
+
+src/api/userApi.js
+  Line 1:8:  'apiClient' is defined but never used  no-unused-vars
+
+src/components/MergeRequestReview.js
+  Line 28:10:  'isLoading' is assigned a value but never used                                                                 no-unused-vars
+  Line 53:6:   React Hook useEffect has a missing dependency: 'selectedMR'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/UserProfile.js
+  Line 19:10:  'isLoading' is assigned a value but never used  no-unused-vars
+
+src/services/MergeRequestService.js
+  Line 93:11:   'bugFile' is assigned a value but never used    no-unused-vars
+  Line 107:13:  'apiResult' is assigned a value but never used  no-unused-vars
+
+src/services/RewardsService.js
+  Line 19:13:  'response' is assigned a value but never used  no-unused-vars
+
+ERROR in [eslint] 
+src/components/MergeRequestReview.js
+  Line 311:16:  'mergeRequests' is not defined  no-undef
+
+Search for the keywords to learn more about each error.
+
+webpack compiled with 1 error and 1 warning

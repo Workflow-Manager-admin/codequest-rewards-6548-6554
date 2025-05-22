@@ -12,48 +12,70 @@ const UserProfile = () => {
   // State for tab switching between different sections
   const [activeTab, setActiveTab] = useState('achievements');
   
-  // Mock user data
-  const userData = {
-    id: 1,
-    name: 'DragonSlayer',
-    avatar: '🔮',
-    level: 5,
-    xp: 456,
-    xpToNextLevel: 600,
-    title: 'Code Warrior',
-    joinDate: 'March 2023',
-    stats: {
-      points: 856,
-      quests: 38,
-      reviews: 142,
-      badges: 12,
-    },
-  };
+  // User data state
+  const [userData, setUserData] = useState(null);
+  const [badges, setBadges] = useState([]);
+  const [activityHistory, setActivityHistory] = useState([]);
+  const [isLoading, setIsLoading] = useState({
+    profile: true,
+    badges: true,
+    activity: true
+  });
   
-  // Mock badges data
-  const badges = [
-    { id: 1, name: 'Bug Hunter', icon: '🐞', description: 'Found 10 critical bugs', unlocked: true },
-    { id: 2, name: 'First Blood', icon: '🩸', description: 'First to review a new project', unlocked: true },
-    { id: 3, name: 'Streak Master', icon: '🔥', description: 'Reviewed code 7 days in a row', unlocked: true },
-    { id: 4, name: 'Eagle Eye', icon: '👁️', description: 'Spotted a security vulnerability', unlocked: true },
-    { id: 5, name: 'Mentor', icon: '🧙‍♂️', description: 'Helped 5 team members improve their code', unlocked: true },
-    { id: 6, name: 'Perfectionist', icon: '✨', description: 'Submitted a flawless review', unlocked: true },
-    { id: 7, name: 'Night Owl', icon: '🦉', description: 'Completed reviews after hours', unlocked: true },
-    { id: 8, name: 'Code Oracle', icon: '🔮', description: 'Predicted and prevented 5 production issues', unlocked: true },
-    { id: 9, name: 'Lightning Fast', icon: '⚡', description: 'Completed 10 reviews in record time', unlocked: true },
-    { id: 10, name: 'Team Player', icon: '🤝', description: 'Collaborated on 20 code reviews', unlocked: false },
-    { id: 11, name: 'Architect', icon: '🏛️', description: 'Suggested major architectural improvements', unlocked: false },
-    { id: 12, name: 'Legend', icon: '👑', description: 'Reached level 10', unlocked: false },
-  ];
+  // Fetch user profile data on component mount
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        setIsLoading(prev => ({ ...prev, profile: true }));
+        const profileData = await UserService.getCurrentUser();
+        setUserData(profileData);
+      } catch (error) {
+        console.error("Failed to load user profile:", error);
+      } finally {
+        setIsLoading(prev => ({ ...prev, profile: false }));
+      }
+    };
+    
+    fetchUserProfile();
+  }, []);
   
-  // Mock activity data
-  const activityHistory = [
-    { id: 1, type: 'review', description: 'Reviewed PR #342 - Auth API Update', points: 25, date: '2 days ago', icon: '📝' },
-    { id: 2, type: 'badge', description: 'Earned "Bug Hunter" badge', date: '3 days ago', icon: '🏆' },
-    { id: 3, type: 'level', description: 'Reached Level 5', date: '1 week ago', icon: '🎮' },
-    { id: 4, type: 'review', description: 'Reviewed PR #337 - Payment Gateway', points: 30, date: '1 week ago', icon: '📝' },
-    { id: 5, type: 'quest', description: 'Completed "Security Guardian" quest', points: 150, date: '2 weeks ago', icon: '🎯' },
-  ];
+  // Fetch user achievements on component mount and when tab changes to achievements
+  useEffect(() => {
+    const fetchUserAchievements = async () => {
+      if (activeTab !== 'achievements') return;
+      
+      try {
+        setIsLoading(prev => ({ ...prev, badges: true }));
+        const achievementsData = await UserService.getUserAchievements();
+        setBadges(achievementsData);
+      } catch (error) {
+        console.error("Failed to load user achievements:", error);
+      } finally {
+        setIsLoading(prev => ({ ...prev, badges: false }));
+      }
+    };
+    
+    fetchUserAchievements();
+  }, [activeTab]);
+  
+  // Fetch user activity history on component mount and when tab changes to activity
+  useEffect(() => {
+    const fetchUserActivity = async () => {
+      if (activeTab !== 'activity') return;
+      
+      try {
+        setIsLoading(prev => ({ ...prev, activity: true }));
+        const activityData = await UserService.getUserActivity();
+        setActivityHistory(activityData);
+      } catch (error) {
+        console.error("Failed to load user activity:", error);
+      } finally {
+        setIsLoading(prev => ({ ...prev, activity: false }));
+      }
+    };
+    
+    fetchUserActivity();
+  }, [activeTab]);
   
   // Calculate XP progress percentage
   const xpProgressPercentage = Math.round((userData.xp / userData.xpToNextLevel) * 100);
