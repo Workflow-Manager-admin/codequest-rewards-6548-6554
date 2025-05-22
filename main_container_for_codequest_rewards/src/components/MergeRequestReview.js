@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import FireEffects from './FireEffects';
-import { mergeRequests, bugRewards } from '../data/mockData';
+import { MergeRequestService } from '../services';
 
 /**
  * MergeRequestReview component provides an interface for reviewing merge requests

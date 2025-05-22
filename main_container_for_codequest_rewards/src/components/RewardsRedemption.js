@@ -322,7 +322,10 @@ const RewardsRedemption = () => {
             overflowX: 'auto',
             padding: '5px 0'
           }}>
-            {rewardCategories.map(category => (
+            {isLoading.categories ? (
+              <div>Loading categories...</div>
+            ) : (
+              categories.map(category => (
               <button
                 key={category.id}
                 className={`tab-btn ${selectedCategory === category.id ? 'active' : ''}`}
@@ -472,7 +475,7 @@ const RewardsRedemption = () => {
           </div>
           
           {/* Redemption history */}
-          {redemptionHistory.length > 0 && (
+          {history.length > 0 && (
             <div className="redemption-history" style={{ marginTop: '40px' }}>
               <h3 className="section-title">Redemption History</h3>
               
