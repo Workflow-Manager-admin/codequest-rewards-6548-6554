@@ -21,6 +21,9 @@ const ThreeFireEffect = ({ width = 300, height = 300 }) => {
   useEffect(() => {
     if (!containerRef.current) return;
     
+    // Capture the container ref value for cleanup
+    const container = containerRef.current;
+    
     // Setup performance monitoring
     statsRef.current = new Stats();
     statsRef.current.showPanel(0); // 0: fps, 1: ms, 2: mb
@@ -29,7 +32,7 @@ const ThreeFireEffect = ({ width = 300, height = 300 }) => {
     statsRef.current.dom.style.zIndex = '1000';
     statsRef.current.dom.style.opacity = '0.5';
     statsRef.current.dom.style.display = 'none'; // Hide stats by default
-    containerRef.current.appendChild(statsRef.current.dom);
+    container.appendChild(statsRef.current.dom);
     
     // Create scene
     const scene = new THREE.Scene();
@@ -52,15 +55,17 @@ const ThreeFireEffect = ({ width = 300, height = 300 }) => {
     });
     renderer.setSize(width, height);
     renderer.setClearColor(0x000000, 0);
-    containerRef.current.appendChild(renderer.domElement);
+    container.appendChild(renderer.domElement);
     rendererRef.current = renderer;
     
     // Create fire particles
     createFireParticles();
     
-    // Animation loop
+    // Animation loop with cleanup handling
+    let animationFrameId;
+    
     const animate = () => {
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
       if (statsRef.current) statsRef.current.begin();
       
       const delta = clockRef.current.getDelta();
@@ -74,25 +79,35 @@ const ThreeFireEffect = ({ width = 300, height = 300 }) => {
     
     // Cleanup
     return () => {
-      if (containerRef.current && renderer.domElement) {
-        containerRef.current.removeChild(renderer.domElement);
+      // Cancel any pending animation frame
+      cancelAnimationFrame(animationFrameId);
+      
+      // Clean up DOM elements
+      if (container && renderer.domElement) {
+        container.removeChild(renderer.domElement);
       }
       
-      if (containerRef.current && statsRef.current) {
-        containerRef.current.removeChild(statsRef.current.dom);
+      if (container && statsRef.current && statsRef.current.dom) {
+        container.removeChild(statsRef.current.dom);
       }
       
+      // Clean up Three.js resources
       if (particlesRef.current) {
         scene.remove(particlesRef.current);
         particlesRef.current.geometry.dispose();
-        if (particlesRef.current.material.dispose) {
+        if (particlesRef.current.material) {
+          if (particlesRef.current.material.uniforms && 
+              particlesRef.current.material.uniforms.pointTexture && 
+              particlesRef.current.material.uniforms.pointTexture.value) {
+            particlesRef.current.material.uniforms.pointTexture.value.dispose();
+          }
           particlesRef.current.material.dispose();
         }
       }
       
       renderer.dispose();
     };
-  }, [width, height]);
+  }, [width, height, createFireParticles]);
   
   // Create fire particles with custom shader
   const createFireParticles = () => {

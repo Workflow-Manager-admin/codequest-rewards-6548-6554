@@ -2,38 +2,11 @@
 > react-kavia@0.1.0 start
 > react-scripts start
 
-(node:1630) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(node:2197) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
 (Use `node --trace-deprecation ...` to show where the warning was created)
-(node:1630) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(node:2197) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
 Starting the development server...
 
-Compiled successfully!
-
-You can now view react-kavia in the browser.
-
-  Local:            http://localhost:3000
-  On Your Network:  http://172.17.0.2:3000
-
-Note that the development build is not optimized.
-To create a production build, use npm run build.
-
-webpack compiled successfully
-Compiling...
-Compiled successfully!
-webpack compiled successfully
-Compiling...
-Compiled successfully!
-webpack compiled successfully
-Compiling...
-Compiled successfully!
-webpack compiled successfully
-Compiling...
-Compiled successfully!
-webpack compiled successfully
-Compiling...
-Compiled successfully!
-webpack compiled successfully
-Compiling...
 Compiled with warnings.
 
 [eslint] 
@@ -55,32 +28,15 @@ Compiled with warnings.
 
 [eslint] 
 src/components/ThreeFireEffect.js
-  Line 82:22:  The ref value 'containerRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'containerRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
-  Line 95:6:   React Hook useEffect has a missing dependency: 'createFireParticles'. Either include it or remove the dependency array                                                                                                                                                   react-hooks/exhaustive-deps
+  Line 110:22:  'createFireParticles' was used before it was defined                                                                                                                                                                                                no-use-before-define
+  Line 113:9:   The 'createFireParticles' function makes the dependencies of useEffect Hook (at line 110) change on every render. Move it inside the useEffect callback. Alternatively, wrap the definition of 'createFireParticles' in its own useCallback() Hook  react-hooks/exhaustive-deps
 
 Search for the keywords to learn more about each warning.
 To ignore, add // eslint-disable-next-line to the line before.
 
 WARNING in [eslint] 
 src/components/ThreeFireEffect.js
-  Line 82:22:  The ref value 'containerRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'containerRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
-  Line 95:6:   React Hook useEffect has a missing dependency: 'createFireParticles'. Either include it or remove the dependency array                                                                                                                                                   react-hooks/exhaustive-deps
-
-webpack compiled with 1 warning
-Compiling...
-Compiled with warnings.
-
-[eslint] 
-src/components/ThreeFireEffect.js
-  Line 82:22:  The ref value 'containerRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'containerRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
-  Line 95:6:   React Hook useEffect has a missing dependency: 'createFireParticles'. Either include it or remove the dependency array                                                                                                                                                   react-hooks/exhaustive-deps
-
-Search for the keywords to learn more about each warning.
-To ignore, add // eslint-disable-next-line to the line before.
-
-WARNING in [eslint] 
-src/components/ThreeFireEffect.js
-  Line 82:22:  The ref value 'containerRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'containerRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
-  Line 95:6:   React Hook useEffect has a missing dependency: 'createFireParticles'. Either include it or remove the dependency array                                                                                                                                                   react-hooks/exhaustive-deps
+  Line 110:22:  'createFireParticles' was used before it was defined                                                                                                                                                                                                no-use-before-define
+  Line 113:9:   The 'createFireParticles' function makes the dependencies of useEffect Hook (at line 110) change on every render. Move it inside the useEffect callback. Alternatively, wrap the definition of 'createFireParticles' in its own useCallback() Hook  react-hooks/exhaustive-deps
 
 webpack compiled with 1 warning
