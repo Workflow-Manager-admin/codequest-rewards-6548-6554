@@ -138,12 +138,30 @@ const MergeRequestReview = () => {
   };
 
   // Mark review as completed
-  const handleCompleteReview = () => {
-    // Update user stats
-    setUserStats(prev => ({
-      ...prev,
-      reviewsCompleted: prev.reviewsCompleted + 1
-    }));
+  const handleCompleteReview = async () => {
+    if (!selectedMR) return;
+    
+    try {
+      // Call service to submit the review
+      const result = await MergeRequestService.submitReview(selectedMR.id, {
+        status: 'completed',
+        timestamp: new Date().toISOString()
+      });
+      
+      if (result.success) {
+        // Update user stats
+        setUserStats(prev => ({
+          ...prev,
+          reviewsCompleted: prev.reviewsCompleted + 1
+        }));
+        
+        // Show confirmation
+        alert("Review completed successfully!");
+      }
+    } catch (error) {
+      console.error("Failed to complete review:", error);
+      alert(`Failed to complete review: ${error.message}`);
+    }
   };
 
   // Format code with line numbers for better display
