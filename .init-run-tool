@@ -1,0 +1,4 @@
+{
+    "command": "PORT=<port> BROWSER=none npm start",
+    "working_directory": "/home/kavia/workspace/code-generation/codequest-rewards-6548-6554/main_container_for_codequest_rewards"
+}
