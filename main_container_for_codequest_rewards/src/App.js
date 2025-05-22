@@ -36,6 +36,9 @@ function App() {
               <Link to="/rewards" className="nav-link">
                 <button className="btn btn-secondary">Rewards</button>
               </Link>
+              <Link to="/admin" className="nav-link">
+                <button className="btn btn-secondary">Admin</button>
+              </Link>
               <Link to="/" className="nav-link">
                 <button className="btn">Dashboard</button>
               </Link>
