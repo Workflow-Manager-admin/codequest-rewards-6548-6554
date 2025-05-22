@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Leaderboard from './components/Leaderboard';
 import UserProfile from './components/UserProfile';
 import MergeRequestReview from './components/MergeRequestReview';
+import RewardsRedemption from './components/RewardsRedemption';
 
 /**
  * Main App component for the CodeQuest Rewards application
@@ -30,6 +31,9 @@ function App() {
               </Link>
               <Link to="/merge-requests" className="nav-link">
                 <button className="btn btn-secondary">Code Review</button>
+              </Link>
+              <Link to="/rewards" className="nav-link">
+                <button className="btn btn-secondary">Rewards</button>
               </Link>
               <Link to="/" className="nav-link">
                 <button className="btn">Dashboard</button>
