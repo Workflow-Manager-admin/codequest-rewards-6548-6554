@@ -62,7 +62,9 @@ const Home = () => {
                 Start Quest
               </button>
             </Link>
-            <button className="btn btn-secondary">View Rewards</button>
+            <Link to="/rewards">
+              <button className="btn btn-secondary">View Rewards</button>
+            </Link>
           </div>
           
           {/* Enhanced fire effects rendered behind the content */}
