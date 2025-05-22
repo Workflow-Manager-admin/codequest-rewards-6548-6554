@@ -3,6 +3,8 @@ import rewardsApi from './rewardsApi';
 import mergeRequestApi from './mergeRequestApi';
 import userApi from './userApi';
 import leaderboardApi from './leaderboardApi';
+import gitIntegrationApi from './gitIntegrationApi';
+import projectApi from './projectApi';
 
 /**
  * Export all API modules from a single entry point
@@ -12,5 +14,7 @@ export {
   rewardsApi,
   mergeRequestApi,
   userApi,
-  leaderboardApi
+  leaderboardApi,
+  gitIntegrationApi,
+  projectApi
 };
