@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import FireEffects from './FireEffects';
-import { availableRewards, rewardCategories, redemptionHistory } from '../data/mockData';
+import { RewardsService } from '../services';
 
 /**
  * RewardsRedemption component displays available rewards that users can redeem with their points
