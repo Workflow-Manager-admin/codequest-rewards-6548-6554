@@ -16,13 +16,29 @@ const FireEffects = () => {
   
   // Detect if device has enough performance for 3D effects
   useEffect(() => {
-    // Simple performance detection
-    // We could make this more sophisticated with actual FPS measurements
-    const hasGoodPerformance = window.matchMedia('(min-width: 768px)').matches && 
-                               !navigator.userAgent.includes('Mobile') &&
-                               window.navigator.hardwareConcurrency > 2;
-    
-    setUse3D(hasGoodPerformance);
+    try {
+      // Simple performance detection with fallbacks for browsers that don't support hardwareConcurrency
+      const cores = window.navigator.hardwareConcurrency || 0;
+      const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const isLargeScreen = window.matchMedia('(min-width: 768px)').matches;
+      
+      // Enable 3D effects only on desktop devices with sufficient cores
+      const hasGoodPerformance = isLargeScreen && !isMobileDevice && cores > 2;
+      
+      // Add a debug flag to force enable/disable 3D effects
+      const debugMode = window.localStorage.getItem('debug_fire_effects');
+      if (debugMode === 'force_3d') {
+        setUse3D(true);
+      } else if (debugMode === 'disable_3d') {
+        setUse3D(false);
+      } else {
+        setUse3D(hasGoodPerformance);
+      }
+    } catch (error) {
+      // If any detection fails, fallback to not using 3D
+      console.warn('Error detecting device performance, falling back to CSS effects:', error);
+      setUse3D(false);
+    }
   }, []);
   
   // Generate larger number of varied embers for enhanced effect
