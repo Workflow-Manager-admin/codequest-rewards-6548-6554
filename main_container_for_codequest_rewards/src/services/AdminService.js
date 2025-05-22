@@ -220,6 +220,34 @@ class AdminService {
    * @param {Object} timeframe - Timeframe for metrics
    * @returns {Promise} Promise resolving to analytics data
    */
+  /**
+   * Add a new user to the system
+   * 
+   * @param {Object} userData - User data
+   * @returns {Promise} Promise resolving to created user
+   */
+  static async addUser(userData) {
+    try {
+      // In a real implementation, this would call the API
+      // const response = await apiClient.post('/admin/users', userData);
+      // return response.data;
+      
+      // Mock implementation
+      console.log('Adding new user:', userData);
+      return {
+        success: true,
+        user: {
+          id: `user-${Date.now()}`,
+          ...userData,
+          activeSince: new Date().toISOString().split('T')[0]
+        }
+      };
+    } catch (error) {
+      console.error('Failed to add user:', error);
+      throw error;
+    }
+  }
+
   static async getAnalytics(timeframe = { period: 'month' }) {
     try {
       // In a real implementation, this would call the API

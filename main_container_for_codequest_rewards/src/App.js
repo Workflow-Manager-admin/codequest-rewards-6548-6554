@@ -6,6 +6,7 @@ import Leaderboard from './components/Leaderboard';
 import UserProfile from './components/UserProfile';
 import MergeRequestReview from './components/MergeRequestReview';
 import RewardsRedemption from './components/RewardsRedemption';
+import AdminDashboard from './components/AdminDashboard';
 
 /**
  * Main App component for the CodeQuest Rewards application
