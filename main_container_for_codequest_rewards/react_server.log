@@ -368,3 +368,6 @@ src/components/ThreeFireEffect.js
   Line 254:3:  Parsing error: Unexpected token, expected "," (254:3)
 
 webpack compiled with 2 errors
+Compiling...
+Compiled successfully!
+webpack compiled successfully
