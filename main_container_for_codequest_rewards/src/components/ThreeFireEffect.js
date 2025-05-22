@@ -110,8 +110,8 @@ const ThreeFireEffect = ({ width = 300, height = 300 }) => {
     };
   }, [width, height, createFireParticles]);
   
-  // Create fire particles with custom shader
-  const createFireParticles = () => {
+  // Create fire particles with custom shader - use useCallback to ensure it's properly included in the dependency array
+  const createFireParticles = React.useCallback(() => {
     // Remove previous particles if they exist
     if (particlesRef.current) {
       sceneRef.current.remove(particlesRef.current);
@@ -178,11 +178,17 @@ const ThreeFireEffect = ({ width = 300, height = 300 }) => {
     geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
     geometry.setAttribute('lifetime', new THREE.BufferAttribute(lifetimes, 1));
     
+    // Create or reuse texture for the fire particles
+    if (!fireParticleTextureRef.current) {
+      const textureDataUrl = createFireParticleTexture();
+      fireParticleTextureRef.current = new THREE.TextureLoader().load(textureDataUrl);
+    }
+    
     // Custom shader material for fire effect
     const material = new THREE.ShaderMaterial({
       uniforms: {
         time: { value: 0 },
-        pointTexture: { value: new THREE.TextureLoader().load(createFireParticleTexture()) }
+        pointTexture: { value: fireParticleTextureRef.current }
       },
       vertexShader: `
         attribute vec3 velocity;
@@ -266,8 +272,8 @@ const ThreeFireEffect = ({ width = 300, height = 300 }) => {
     return canvas.toDataURL();
   };
   
-  // Update fire particles for animation
-  const updateFireParticles = (delta) => {
+  // Update fire particles for animation - use useCallback to ensure proper cleanup
+  const updateFireParticles = React.useCallback((delta) => {
     if (!particlesRef.current) return;
     
     const particles = particlesRef.current;
