@@ -16,6 +16,7 @@ const ThreeFireEffect = ({ width = 300, height = 300 }) => {
   const statsRef = useRef(null);
   const particlesRef = useRef(null);
   const clockRef = useRef(new THREE.Clock());
+  const fireParticleTextureRef = useRef(null); // Store texture to prevent recreating it
   
   // Initialize Three.js scene
   useEffect(() => {
