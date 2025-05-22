@@ -25,49 +25,74 @@ const RewardsRedemption = () => {
     name: 'DragonSlayer'
   };
   
-  // Filter rewards based on selected category and search query
+  // State for storing category data
+  const [categories, setCategories] = useState([]);
+  // State for storing redemption history
+  const [history, setHistory] = useState([]);
+  // Loading states
+  const [isLoading, setIsLoading] = useState({
+    rewards: false,
+    categories: false,
+    history: false
+  });
+  
+  // Load categories on mount
   useEffect(() => {
-    let rewards = [...availableRewards];
+    const fetchCategories = async () => {
+      try {
+        setIsLoading(prev => ({ ...prev, categories: true }));
+        const categories = await RewardsService.getRewardCategories();
+        setCategories(categories);
+      } catch (error) {
+        console.error("Failed to load categories:", error);
+      } finally {
+        setIsLoading(prev => ({ ...prev, categories: false }));
+      }
+    };
     
-    // Filter by category if not "all"
-    if (selectedCategory !== 'all') {
-      rewards = rewards.filter(reward => reward.category === selectedCategory);
-    }
+    fetchCategories();
+  }, []);
+  
+  // Load redemption history on mount
+  useEffect(() => {
+    const fetchRedemptionHistory = async () => {
+      try {
+        setIsLoading(prev => ({ ...prev, history: true }));
+        const history = await RewardsService.getRedemptionHistory();
+        setHistory(history);
+      } catch (error) {
+        console.error("Failed to load redemption history:", error);
+      } finally {
+        setIsLoading(prev => ({ ...prev, history: false }));
+      }
+    };
     
-    // Filter by search query
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
-      rewards = rewards.filter(reward => 
-        reward.name.toLowerCase().includes(query) || 
-        reward.description.toLowerCase().includes(query)
-      );
-    }
+    fetchRedemptionHistory();
+  }, []);
+  
+  // Filter and fetch rewards based on selected category and search query
+  useEffect(() => {
+    const fetchRewards = async () => {
+      try {
+        setIsLoading(prev => ({ ...prev, rewards: true }));
+        
+        const filters = {
+          category: selectedCategory,
+          searchQuery: searchQuery.trim(),
+          sortBy: sortOption
+        };
+        
+        const result = await RewardsService.getAvailableRewards(filters);
+        setFilteredRewards(result.data);
+      } catch (error) {
+        console.error("Failed to load rewards:", error);
+        setFilteredRewards([]);
+      } finally {
+        setIsLoading(prev => ({ ...prev, rewards: false }));
+      }
+    };
     
-    // Apply sorting
-    switch (sortOption) {
-      case 'price-low':
-        rewards.sort((a, b) => a.points - b.points);
-        break;
-      case 'price-high':
-        rewards.sort((a, b) => b.points - a.points);
-        break;
-      case 'popularity':
-        rewards.sort((a, b) => {
-          const popularityRank = { 'very high': 4, 'high': 3, 'medium': 2, 'low': 1 };
-          return popularityRank[b.popularity] - popularityRank[a.popularity];
-        });
-        break;
-      case 'featured':
-      default:
-        // Featured items first, then sort by points
-        rewards.sort((a, b) => {
-          if (a.featured && !b.featured) return -1;
-          if (!a.featured && b.featured) return 1;
-          return b.points - a.points;
-        });
-    }
-    
-    setFilteredRewards(rewards);
+    fetchRewards();
   }, [selectedCategory, sortOption, searchQuery]);
   
   // Handle reward selection and modal display
@@ -77,15 +102,29 @@ const RewardsRedemption = () => {
   };
   
   // Handle reward redemption
-  const handleRedeemReward = () => {
-    // In a real app, this would make an API call to redeem the reward
-    // For now, we'll just close the modal and simulate success
-    setShowModal(false);
+  const handleRedeemReward = async () => {
+    if (!selectedReward) return;
     
-    // Show confirmation message (could be enhanced with a toast notification)
-    setTimeout(() => {
-      alert(`Successfully redeemed ${selectedReward.name}!`);
-    }, 300);
+    try {
+      // Call the service to redeem the reward
+      const result = await RewardsService.redeemReward(selectedReward.id, userData);
+      
+      if (result.success) {
+        setShowModal(false);
+        
+        // Refresh redemption history after successful redemption
+        const updatedHistory = await RewardsService.getRedemptionHistory();
+        setHistory(updatedHistory);
+        
+        // Show confirmation message (could be enhanced with a toast notification)
+        setTimeout(() => {
+          alert(`Successfully redeemed ${selectedReward.name}!`);
+        }, 300);
+      }
+    } catch (error) {
+      console.error("Failed to redeem reward:", error);
+      alert(`Failed to redeem reward: ${error.message}`);
+    }
   };
   
   // Check if user has enough points for a reward
