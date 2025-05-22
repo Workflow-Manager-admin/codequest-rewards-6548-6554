@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import FireEffects from './FireEffects';
 
 /**
@@ -50,15 +51,17 @@ const Home = () => {
           
           {/* Multiple action buttons for better interactivity */}
           <div className="action-buttons">
-            <button 
-              className="btn btn-large"
-              style={{
-                transform: isHovering ? 'translateY(-2px) scale(1.03)' : 'none',
-                transition: 'transform 0.3s ease'
-              }}
-            >
-              Start Quest
-            </button>
+            <Link to="/merge-requests">
+              <button 
+                className="btn btn-large"
+                style={{
+                  transform: isHovering ? 'translateY(-2px) scale(1.03)' : 'none',
+                  transition: 'transform 0.3s ease'
+                }}
+              >
+                Start Quest
+              </button>
+            </Link>
             <button className="btn btn-secondary">View Rewards</button>
           </div>
           
