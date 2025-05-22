@@ -160,30 +160,39 @@ body {
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
-/* Gaming style button with hover effects */
+/* Enhanced Gaming style buttons with hover effects */
 .btn {
   background: linear-gradient(135deg, var(--fire-red), var(--fire-orange));
+  background-size: 200% 200%;
   color: white;
   border: none;
   border-radius: 4px;
   padding: 10px 20px;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 0 10px var(--fire-glow);
+  box-shadow: 0 0 10px var(--fire-glow), inset 0 0 10px rgba(255, 255, 255, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  clip-path: polygon(
+    6% 0%, 
+    100% 0%, 
+    94% 100%, 
+    0% 100%
+  );
 }
 
 .btn:hover {
-  background: linear-gradient(135deg, var(--fire-orange), var(--fire-yellow));
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px var(--fire-glow);
+  animation: button-heat 2s ease infinite;
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 7px 20px var(--fire-glow), inset 0 0 15px rgba(255, 255, 255, 0.4);
 }
 
 .btn:active {
-  transform: translateY(1px);
+  transform: translateY(1px) scale(0.98);
 }
 
 .btn::after {
@@ -193,7 +202,7 @@ body {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+  background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
   opacity: 0;
   transition: opacity 0.3s;
   transform: scale(0.5);
@@ -205,11 +214,94 @@ body {
   transform: scale(1);
 }
 
+/* Large action button */
 .btn-large {
-  padding: 12px 24px;
-  font-size: 1.1rem;
+  padding: 14px 28px;
+  font-size: 1.2rem;
   text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 2px;
+  clip-path: polygon(
+    4% 0%, 
+    100% 0%, 
+    96% 100%, 
+    0% 100%
+  );
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Secondary button style */
+.btn-secondary {
+  background: linear-gradient(135deg, var(--gaming-neon-blue), var(--gaming-purple));
+  background-size: 200% 200%;
+  box-shadow: 0 0 15px rgba(77, 77, 255, 0.5);
+}
+
+.btn-secondary:hover {
+  box-shadow: 0 7px 20px rgba(77, 77, 255, 0.7);
+}
+
+/* Action buttons container */
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+/* Gaming UI elements */
+.game-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--fire-orange);
+  border-radius: 4px;
+  box-shadow: 0 0 10px var(--fire-glow);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--fire-yellow);
+  text-shadow: 0 0 5px var(--fire-glow);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--text-secondary);
   letter-spacing: 1px;
+}
+
+/* Level indicator */
+.level-indicator {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+  padding: 5px 15px;
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 15px;
+  box-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
+  border: 1px solid var(--fire-yellow);
+}
+
+.level-indicator .level {
+  background: linear-gradient(to right, var(--fire-orange), var(--fire-yellow));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-left: 5px;
 }
 
 /* Fire Effects Elements */
