@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FireEffects from './FireEffects';
+import { UserService } from '../services';
 
 /**
  * UserProfile component displays the user's profile information, stats, badges, and progress

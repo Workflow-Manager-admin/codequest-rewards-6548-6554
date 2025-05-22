@@ -124,7 +124,18 @@ const Leaderboard = () => {
           </div>
           
           {/* Leaderboard content */}
-          {renderLeaderboard()}
+          {isLoading ? (
+            <div style={{
+              padding: '40px 0',
+              textAlign: 'center',
+              color: 'var(--text-secondary)',
+              fontSize: '1.2rem'
+            }}>
+              Loading leaderboard data...
+            </div>
+          ) : (
+            renderLeaderboard()
+          )}
           
           {/* Legend */}
           <div className="leaderboard-legend">
