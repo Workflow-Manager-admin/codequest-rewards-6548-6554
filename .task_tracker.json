@@ -1,0 +1,5 @@
+{
+  "task_description": "{'component_name': 'Main Container for CodeQuest Rewards', 'description': 'Primary container for CodeQuest Rewards implementation: A gamified internal application designed to incentivize and improve code quality by rewarding reviewers who identify and validate bugs or discrepancies in Merge Requests across organizational projects.', 'framework': 'react', 'platform': 'web'}",
+  "tasks": {},
+  "next_task_id": 1
+}
