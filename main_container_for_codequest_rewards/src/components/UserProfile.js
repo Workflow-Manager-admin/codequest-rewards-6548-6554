@@ -87,41 +87,51 @@ const UserProfile = () => {
         return (
           <div className="profile-achievements">
             <h3 className="section-title">Achievement Badges</h3>
-            <div className="badges-grid">
-              {badges.map((badge) => (
-                <div 
-                  key={badge.id} 
-                  className={`badge-item ${badge.unlocked ? 'unlocked' : 'locked'}`}
-                  title={badge.description}
-                >
-                  <div className="badge-icon">{badge.icon}</div>
-                  <div className="badge-name">{badge.name}</div>
-                  <div className="badge-status">
-                    {badge.unlocked ? 'Unlocked' : 'Locked'}
+            
+            {isLoading.badges ? (
+              <div style={{ textAlign: 'center', padding: '30px 0' }}>Loading achievements...</div>
+            ) : (
+              <div className="badges-grid">
+                {badges.map((badge) => (
+                  <div 
+                    key={badge.id} 
+                    className={`badge-item ${badge.unlocked ? 'unlocked' : 'locked'}`}
+                    title={badge.description}
+                  >
+                    <div className="badge-icon">{badge.icon}</div>
+                    <div className="badge-name">{badge.name}</div>
+                    <div className="badge-status">
+                      {badge.unlocked ? 'Unlocked' : 'Locked'}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         );
       case 'activity':
         return (
           <div className="profile-activity">
             <h3 className="section-title">Recent Activity</h3>
-            <div className="activity-timeline">
-              {activityHistory.map((activity) => (
-                <div key={activity.id} className="activity-item">
-                  <div className="activity-icon">{activity.icon}</div>
-                  <div className="activity-content">
-                    <div className="activity-description">{activity.description}</div>
-                    <div className="activity-meta">
-                      {activity.points && <span className="activity-points">+{activity.points} pts</span>}
-                      <span className="activity-date">{activity.date}</span>
+            
+            {isLoading.activity ? (
+              <div style={{ textAlign: 'center', padding: '30px 0' }}>Loading activity...</div>
+            ) : (
+              <div className="activity-timeline">
+                {activityHistory.map((activity) => (
+                  <div key={activity.id} className="activity-item">
+                    <div className="activity-icon">{activity.icon}</div>
+                    <div className="activity-content">
+                      <div className="activity-description">{activity.description}</div>
+                      <div className="activity-meta">
+                        {activity.points && <span className="activity-points">+{activity.points} pts</span>}
+                        <span className="activity-date">{activity.date}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         );
       case 'stats':
@@ -187,55 +197,77 @@ const UserProfile = () => {
     <main>
       <div className="container">
         <div className="profile-container">
-          {/* User profile header with avatar and main info */}
-          <div className="profile-header">
-            <div className="profile-avatar-container">
-              <div className="profile-avatar">{userData.avatar}</div>
-              <div className="profile-level-badge">{userData.level}</div>
+          {isLoading.profile ? (
+            <div style={{ 
+              textAlign: 'center', 
+              padding: '50px 0',
+              fontSize: '1.2rem',
+              color: 'var(--text-secondary)'
+            }}>
+              Loading profile data...
             </div>
-            
-            <div className="profile-info">
-              <h1 className="profile-name">{userData.name}</h1>
-              <div className="profile-title">{userData.title}</div>
-              <div className="profile-join-date">Member since {userData.joinDate}</div>
+          ) : userData ? (
+            <>
+              {/* User profile header with avatar and main info */}
+              <div className="profile-header">
+                <div className="profile-avatar-container">
+                  <div className="profile-avatar">{userData.avatar}</div>
+                  <div className="profile-level-badge">{userData.level}</div>
+                </div>
+                
+                <div className="profile-info">
+                  <h1 className="profile-name">{userData.name}</h1>
+                  <div className="profile-title">{userData.title}</div>
+                  <div className="profile-join-date">Member since {userData.joinDate}</div>
+                </div>
+              </div>
+              
+              {/* XP Progress bar */}
+              <div className="xp-progress-container">
+                <div className="xp-label">
+                  <span>XP: {userData.xp}/{userData.xpToNextLevel}</span>
+                  <span>Level {userData.level}</span>
+                </div>
+                <div className="xp-progress-track">
+                  <div 
+                    className="xp-progress-fill"
+                    style={{width: `${xpProgressPercentage}%`}}
+                  ></div>
+                  <div className="xp-progress-glow"></div>
+                </div>
+                <div className="xp-progress-percent">{xpProgressPercentage}%</div>
+              </div>
+              
+              {/* User stats */}
+              <div className="game-stats profile-stats">
+                <div className="stat-item">
+                  <div className="stat-value">{userData.stats.points}</div>
+                  <div className="stat-label">Points</div>
+                </div>
+                <div className="stat-item">
+                  <div className="stat-value">{userData.stats.quests}</div>
+                  <div className="stat-label">Quests</div>
+                </div>
+                <div className="stat-item">
+                  <div className="stat-value">{userData.stats.reviews}</div>
+                  <div className="stat-label">Reviews</div>
+                </div>
+                <div className="stat-item">
+                  <div className="stat-value">{userData.stats.badges}</div>
+                  <div className="stat-label">Badges</div>
+                </div>
+              </div>
+            </>
+          ) : (
+            <div style={{ 
+              textAlign: 'center', 
+              padding: '50px 0',
+              fontSize: '1.2rem',
+              color: 'var(--fire-red)'
+            }}>
+              Failed to load profile data
             </div>
-          </div>
-          
-          {/* XP Progress bar */}
-          <div className="xp-progress-container">
-            <div className="xp-label">
-              <span>XP: {userData.xp}/{userData.xpToNextLevel}</span>
-              <span>Level {userData.level}</span>
-            </div>
-            <div className="xp-progress-track">
-              <div 
-                className="xp-progress-fill"
-                style={{width: `${xpProgressPercentage}%`}}
-              ></div>
-              <div className="xp-progress-glow"></div>
-            </div>
-            <div className="xp-progress-percent">{xpProgressPercentage}%</div>
-          </div>
-          
-          {/* User stats */}
-          <div className="game-stats profile-stats">
-            <div className="stat-item">
-              <div className="stat-value">{userData.stats.points}</div>
-              <div className="stat-label">Points</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-value">{userData.stats.quests}</div>
-              <div className="stat-label">Quests</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-value">{userData.stats.reviews}</div>
-              <div className="stat-label">Reviews</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-value">{userData.stats.badges}</div>
-              <div className="stat-label">Badges</div>
-            </div>
-          </div>
+          )}
           
           {/* Tab navigation for profile sections */}
           <div className="profile-tabs">
