@@ -106,9 +106,15 @@ const ThreeFireEffect = ({ width = 300, height = 300 }) => {
         }
       }
       
+      // Dispose of the cached texture
+      if (fireParticleTextureRef.current) {
+        fireParticleTextureRef.current.dispose();
+        fireParticleTextureRef.current = null;
+      }
+      
       renderer.dispose();
     };
-  }, [width, height, createFireParticles]);
+  }, [width, height, createFireParticles, updateFireParticles]);
   
   // Create fire particles with custom shader - use useCallback to ensure it's properly included in the dependency array
   const createFireParticles = React.useCallback(() => {
