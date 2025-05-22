@@ -1,4 +1,5 @@
 import axios from 'axios';
+import apiConfig from './apiConfig';
 
 /**
  * Configured axios instance for making API requests
@@ -6,11 +7,9 @@ import axios from 'axios';
  * authentication headers, interceptors, etc.
  */
 const apiClient = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || '/api',
-  timeout: 10000,
-  headers: {
-    'Content-Type': 'application/json',
-  }
+  baseURL: apiConfig.baseURL,
+  timeout: apiConfig.timeout,
+  headers: apiConfig.headers
 });
 
 /**
