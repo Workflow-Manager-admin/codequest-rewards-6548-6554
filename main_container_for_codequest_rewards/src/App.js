@@ -21,6 +21,9 @@ function App() {
               </div>
             </Link>
             <div style={{ display: 'flex', gap: '12px' }}>
+              <Link to="/profile" className="nav-link">
+                <button className="btn btn-secondary">Profile</button>
+              </Link>
               <Link to="/leaderboard" className="nav-link">
                 <button className="btn btn-secondary">Leaderboard</button>
               </Link>
@@ -35,6 +38,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/profile" element={<UserProfile />} />
       </Routes>
     </div>
   );
